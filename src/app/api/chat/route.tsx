@@ -10,10 +10,8 @@ export async function POST(request: NextRequest) {
     const result = await model.generateContent(prompt);
     const response = result.response;
     const text = response.text().replaceAll('*', '');
-    console.log(text);
     return NextResponse.json({ assistantResponse: text }, { status: 201 });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 401 });
-    // }
   }
 }

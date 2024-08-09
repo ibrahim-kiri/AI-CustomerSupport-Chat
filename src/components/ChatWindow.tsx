@@ -21,12 +21,6 @@ export default function ChatWindow() {
   const [userMessage, setUserMessage] = useState<string>('');
   const [loadingResponse, setLoadingResponse] = useState<boolean>(false);
 
-  const wait = (time: number) => {
-    return new Promise((resolve) => {
-      setTimeout(resolve, time);
-    });
-  };
-
   useEffect(() => {
     chatBottomRef.current.scrollIntoView({
       behavior: 'smooth',
