@@ -19,6 +19,13 @@ export default function ChatWindow() {
   const chatBottomRef = useRef(null);
 
   const [userMessage, setUserMessage] = useState<string>('');
+  const [loadingResponse, setLoadingResponse] = useState<boolean>(false);
+
+  const wait = (time: number) => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, time);
+    });
+  };
 
   useEffect(() => {
     chatBottomRef.current.scrollIntoView({
@@ -35,6 +42,7 @@ export default function ChatWindow() {
     e.preventDefault();
     setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
     setUserMessage('');
+    setLoadingResponse(true);
     const response = await fetch('http://localhost:3000/api/chat', {
       method: 'POST',
       body: JSON.stringify({ prompt: userMessage }),
@@ -43,6 +51,7 @@ export default function ChatWindow() {
 
     if (response.status === 201) {
       const { assistantResponse } = await response.json();
+
       setMessages((prev) => [
         ...prev,
         { role: 'assistant', content: assistantResponse },
@@ -51,10 +60,11 @@ export default function ChatWindow() {
       const { error } = await response.json();
       setMessages((prev) => [...prev, { role: 'error', content: error }]);
     }
+    setLoadingResponse(false);
   };
 
   return (
-    <div className="flex flex-col w-4/5 md:w-1/2 mx-auto bg-red-400 p-10 gap-3 mt-12 md:mt-28 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500">
+    <div className="flex flex-col w-4/5 md:w-1/2 mx-auto bg-red-400 p-5 md:p-10 gap-3 mt-12 md:mt-16 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500">
       <div
         className="flex text-wrap flex-col gap-5 bg-white p-6 overflow-y-scroll h-96 border border-gray-900 rounded-md "
         id="chatWindow "
@@ -69,13 +79,17 @@ export default function ChatWindow() {
                      msg.role === 'error' ? 'bg-red-500 self-center' : ''
                    } border border-black rounded text-xs md:text-base max-w-52 md:w-1/2 text-wrap px-2 py-1 flex flex-col gap-3 `}
             >
-              <p className="text-sm opacity-40 font-bold border-b border-black border-opacity-35">
+              <p className="text-sm opacity-40 font-bold border-b border-black border-opacity-35 ">
                 {msg.role.toUpperCase()}:
               </p>
-              <p> {msg.content}</p>
+              <p className="break-words text-wrap"> {msg.content}</p>
             </div>
           );
         })}
+        {loadingResponse && (
+          <i className=" self-start fa-solid fa-spinner fa-spin-pulse fa-xl"></i>
+        )}
+
         <div ref={chatBottomRef} id="chatBottom"></div>
       </div>
       <div id="promptArea mt-3">
@@ -86,12 +100,13 @@ export default function ChatWindow() {
             className="px-3 py-1 rounded border border-gray-900  "
             placeholder="Insert your question here"
             required={true}
+            rows={3}
           />
           <button
             type="submit"
-            className="bg-gray-200 hover:bg-white text-black m-auto py-2 px-4 border border-blue-700 rounded font-bold"
+            className="bg-gray-200 hover:bg-white text-black m-auto py-2 px-4 border border-blue-700 rounded-3xl font-bold"
           >
-            Send
+            SEND
           </button>
         </form>
       </div>
