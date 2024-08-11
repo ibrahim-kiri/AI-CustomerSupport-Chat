@@ -13,7 +13,7 @@ export default function Home() {
           ai chat
         </h1>
       </div>
-      <ChatWindow />;
+      <ChatWindow />
     </>
   );
 }

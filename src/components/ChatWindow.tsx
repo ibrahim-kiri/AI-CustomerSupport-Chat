@@ -2,7 +2,14 @@
 
 import { useAuth } from '@/firebase/authProvider';
 import { auth, firestore } from '@/firebase/firebase';
-import { addDoc, collection, getDocs, query, where, orderBy } from 'firebase/firestore'; // Added `orderBy`
+import {
+  addDoc,
+  collection,
+  getDocs,
+  query,
+  where,
+  orderBy,
+} from 'firebase/firestore'; // Added `orderBy`
 import { useState, useEffect, useRef } from 'react';
 
 export default function ChatWindow() {
@@ -22,6 +29,7 @@ export default function ChatWindow() {
   useEffect(() => {
     const fetchMessages = async () => {
       const user = auth.currentUser;
+      console.log(user);
       if (user) {
         const userId = user.uid;
         const q = query(
@@ -40,17 +48,21 @@ export default function ChatWindow() {
         });
 
         // Set messages, ensuring initial assistant message is included if no messages exist
+
         setMessages(
           fetchedMessages.length > 0
             ? fetchedMessages
             : [
                 {
                   role: 'assistant',
-                  content: "Hi! I'm the Headstarter support assistant. How can I help you today?",
+                  content:
+                    "Hi! I'm the Headstarter support assistant. How can I help you today?",
                   timestamp: new Date(),
                 },
               ]
         );
+      } else {
+        console.log('error');
       }
     };
 
@@ -142,7 +154,7 @@ export default function ChatWindow() {
         >
           Logout
         </button>
-  
+
         <div
           className="flex flex-col gap-3 bg-gray-50 p-2 overflow-y-scroll h-[480px] border border-gray-300 rounded-[24px] mb-2"
           id="chatWindow"
@@ -169,7 +181,6 @@ export default function ChatWindow() {
           )}
           <div ref={chatBottomRef} id="chatBottom"></div>
         </div>
-  
 
         <form onSubmit={submitHandler} className="flex items-center gap-2 p-2">
           <textarea
@@ -188,8 +199,7 @@ export default function ChatWindow() {
             SEND
           </button>
         </form>
-      
       </div>
     </div>
-  );  
+  );
 }
