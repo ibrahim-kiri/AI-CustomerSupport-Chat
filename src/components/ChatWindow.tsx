@@ -29,7 +29,7 @@ export default function ChatWindow() {
   useEffect(() => {
     const fetchMessages = async () => {
       const user = auth.currentUser;
-      console.log(user);
+
       if (user) {
         const userId = user.uid;
         const q = query(
@@ -61,8 +61,6 @@ export default function ChatWindow() {
                 },
               ]
         );
-      } else {
-        console.log('error');
       }
     };
 
