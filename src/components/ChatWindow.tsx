@@ -73,7 +73,7 @@ export default function ChatWindow() {
     if (chatBottomRef.current) {
       chatBottomRef.current.scrollIntoView({
         behavior: 'smooth',
-        block: 'start',
+        block: 'nearest',
       });
     }
   }, [messages]); // Scroll to the bottom whenever messages are updated
@@ -113,6 +113,7 @@ export default function ChatWindow() {
         };
 
         setMessages((prev) => [...prev, newAssistantMessage]);
+        setLoadingResponse(false);
 
         // Save both user and assistant messages to Firestore, with timestamps
         await addDoc(collection(firestore, 'chats'), {
@@ -133,7 +134,6 @@ export default function ChatWindow() {
     } catch (error) {
       console.error('Error:', error);
     }
-    setLoadingResponse(false);
   };
 
   const handleLogout = async () => {
