@@ -10,7 +10,7 @@ import {
   signOut,
   GoogleAuthProvider,
 } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 // Create a Context for authentication
 const AuthContext = createContext();
@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     // Set up an observer on the Auth object to get the current user's auth state
@@ -33,16 +34,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     // Redirect to login page if the user is not authenticated and the path is not public
-    if (router.pathname) {
+    if (pathname) {
       const publicPaths = ['/login', '/register'];
-      console.log('Current Path:', router.pathname);
-
-      if (!loading && !user && !publicPaths.includes(router.pathname)) {
-        console.log('Redirecting to /login');
+      if (!loading && !user && !publicPaths.includes(pathname)) {
         router.push('/login');
       }
     }
-  }, [user, loading, router.pathname]);
+  }, [user, loading, pathname]);
 
   // Function to register a new user with email and password
   const register = (email, password) => {

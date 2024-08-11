@@ -70,6 +70,7 @@ export default function RegisterForm() {
               placeholder="Password"
               className="mt-1 px-3 py-2 border border-gray-300 rounded-[24px] w-full focus:ring-blue-500 focus:border-blue-500"
               required
+              autoComplete="on"
             />
           </div>
           <button
