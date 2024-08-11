@@ -12,8 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <Script
         src="https://kit.fontawesome.com/739a42caa2.js"
-        // crossOrigin="anonymous"
-        rel="preload"
+        crossOrigin="anonymous"
       ></Script>
       <body
         className={`${inter.className} bg-white`}
