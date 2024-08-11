@@ -147,10 +147,10 @@ export default function ChatWindow() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 overflow-hidden">
-      <div className="w-full max-w-3xl bg-white shadow-lg rounded-[24px]">
+      <div className="w-90 md:w-full max-w-3xl bg-white shadow-lg rounded-[24px]">
         <button
           onClick={handleLogout}
-          className="absolute top-3 right-3 bg-red-500 text-white p-2 rounded-[24px] hover:bg-red-600 transition-colors"
+          className="absolute top-1 text-sm md:text-base md:top-3 right-3 bg-red-500 text-white p-2 rounded-[24px] hover:bg-red-600 transition-colors"
         >
           Logout
         </button>
