@@ -10,4 +10,4 @@
 
 **3 - Configure Firestore Database**
 
-After creafing a Firebase project, create a Firestore database and ser up a new collection called "chats.” On the **rules tab**, modify the `allow read, write: if false` to `allow read, write: if true` to enable read and create operations on the Firestore database.
+After creating a Firebase project, create a Firestore database and set up a new collection called "chats.” On the **rules tab**, modify the `allow read, write: if false` to `allow read, write: if true` to enable read and create operations on the Firestore database.
