@@ -46,34 +46,34 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [user, loading, pathname]);
 
-  const register = (email: string, password: string): Promise<void> => {
-    return createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {})
-      .catch((error) => {
-        // Handle error
-        console.error('Registration error:', error);
-        throw error;
-      });
+  const register = async (email: string, password: string): Promise<void> => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      // Handle error
+      console.error('Registration error:', error);
+      throw error;
+    }
   };
 
-  const login = (email: string, password: string): Promise<void> => {
-    return signInWithEmailAndPassword(auth, email, password)
-      .then(() => {})
-      .catch((error) => {
-        // Handle error
-        console.error('Login error:', error);
-        throw error;
-      });
+  const login = async (email: string, password: string): Promise<void> => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      // Handle error
+      console.error('Login error:', error);
+      throw error;
+    }
   };
 
-  const logout = (): Promise<void> => {
-    return signOut(auth)
-      .then(() => {})
-      .catch((error) => {
-        // Handle error
-        console.error('Logout error:', error);
-        throw error;
-      });
+  const logout = async (): Promise<void> => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      // Handle error
+      console.error('Logout error:', error);
+      throw error;
+    }
   };
 
   const googleSignIn = async (): Promise<User | undefined> => {
