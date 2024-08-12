@@ -7,11 +7,6 @@
 - Google Gemini: You can get a Google Gemini API Key at [Google Dev](https://ai.google.dev/gemini-api?_gl=1*3uqr5z*_up*MQ..&gclid=CjwKCAjw2dG1BhB4EiwA998cqFEKGECQTtKlQ9oQmMMvRO3WzMTfPkVGU-3HTz9NkeCUuB8XU7mYPBoCDQIQAvD_BwE)
 - Firebase variables: Create a new project at [Firebase.google](https://firebase.google.com/) and copy all the relevant variable values provided by Firebase to the .env file (keep the NEXT_PUBLIC to it can be read on the client side)
 
-### Google Gemnini:
-
-### Firebase variables:
-
-Create a new project at [Firebase.google](https://firebase.google.com/) and copy all the variable values provided by Firebase to the .env file.
 
 **3 - Configure Firestore Database**
 
