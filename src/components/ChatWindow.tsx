@@ -144,8 +144,19 @@ export default function ChatWindow() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 overflow-hidden">
-      <div className="w-90 md:w-full max-w-3xl bg-white shadow-lg rounded-[24px]">
+    <div className="flex items-center justify-center max-h-screen overflow-hidden">
+      <div
+          className="absolute top-0 left-0 w-full h-full"
+          style={{
+              backgroundImage: `url('./images/chatbot.jpg')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              filter: 'blur(3px)',
+              zIndex: -1,
+          }}
+      ></div>
+      <div className="w-90 md:w-full max-w-3xl bg-transparent shadow-lg rounded-[24px]">
         <button
           onClick={handleLogout}
           className="absolute top-1 text-sm md:text-base md:top-3 right-3 bg-red-500 text-white p-2 rounded-[24px] hover:bg-red-600 transition-colors"
@@ -154,24 +165,26 @@ export default function ChatWindow() {
         </button>
 
         <div
-          className="flex flex-col gap-3 bg-gray-50 p-2 overflow-y-scroll h-[480px] border border-gray-300 rounded-[24px] mb-2"
+          className="flex flex-col gap-3 bg-transparent p-2 overflow-y-scroll h-[480px] border border-gray-300 rounded-[24px] mb-2"
           id="chatWindow"
         >
           {messages.map((msg, idx) => (
             <div
               key={idx}
-              className={`${
+              className={`flex items-start gap-2 ${
                 msg.role === 'user'
-                  ? 'bg-green-100 self-end'
+                  ? 'bg-green-400 self-end'
                   : msg.role === 'assistant'
-                  ? 'bg-blue-100 self-start'
+                  ? 'bg-blue-400 self-start'
                   : 'bg-red-100 self-center'
               } border border-gray-300 rounded-[24px] px-4 py-2 max-w-xs`}
             >
-              <p className="text-xs font-medium text-gray-600">
-                {msg.role.toUpperCase()}:
-              </p>
-              <p className="text-sm text-gray-800 break-words">{msg.content}</p>
+              <div>
+                <p className="text-xs font-bold text-black-600">
+                  {msg.role.toLowerCase()}:
+                </p>
+                <p className="text-sm text-gray-800 break-words">{msg.content}</p>
+              </div>
             </div>
           ))}
           {loadingResponse && (
@@ -188,7 +201,6 @@ export default function ChatWindow() {
             placeholder="Insert your question here"
             required
             rows={2}
-            // style={{ width: 'calc(100% - 104px)' }}
           />
           <button
             type="submit"

@@ -31,9 +31,9 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen">
       <div className="flex flex-col items-center w-full max-w-md">
-        <h2 className=" text-xl md:text-3xl font-bold text-center mb-6 text-gray-700 text-wrap">
+        <h2 className=" text-xl md:text-3xl font-bold text-center mb-6 text-white text-wrap">
           Welcome to Chat Support Assistant
         </h2>
         <div className="bg-white p-8 shadow-lg rounded-[24px] w-80 md:w-[500px] h-[400px] overflow-auto">

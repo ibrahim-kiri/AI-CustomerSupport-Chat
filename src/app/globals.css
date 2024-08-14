@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* For WebKit browsers (Chrome, Safari) */
+#chatWindow {
+overflow: auto;
+}
+
+#chatWindow::-webkit-scrollbar {
+display: none;
+}
+
+/* For Firefox */
+#chatWindow {
+scrollbar-width: none;
+}
+
+/* For Internet Explorer and Edge */
+#chatWindow {
+-ms-overflow-style: none;
+}
+  
+  
+
+  
+  
