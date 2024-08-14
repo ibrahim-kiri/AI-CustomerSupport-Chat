@@ -96,7 +96,7 @@ export default function ChatWindow() {
     setLoadingResponse(true);
 
     try {
-      const response = await fetch('http://localhost:3000/api/chat', {
+      const response = await fetch('https://ai-support-assistant-blush.vercel.app/api/chat', {
         method: 'POST',
         body: JSON.stringify({ prompt: userMessage }),
         cache: 'no-store',
