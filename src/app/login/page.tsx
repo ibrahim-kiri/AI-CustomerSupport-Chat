@@ -12,7 +12,6 @@ export default function LoginPage() {
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
-                    // filter: 'blur(3px)',
                     zIndex: -1,
                 }}
             ></div>
